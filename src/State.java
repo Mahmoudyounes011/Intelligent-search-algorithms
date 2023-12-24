@@ -58,37 +58,42 @@ public class State {
     public boolean[] grid(boolean[] p1,boolean[]p2){
         boolean[] grid = new boolean[84];
         int j=43;
+        int k=2;
         for(int i=9;i<42;i++) {
             if(p1[i]==true){
-            grid[i]=p1[i];}
-            if(p2[j]==true){
-                grid[i]=p1[j];}
+            grid[k]=true;}
+            else if(p2[j]==true){
+                grid[k]=true;}
             else {
-                grid[i]=false;}
+                grid[k]=false;}
             j++;
+            k++;
         }
-         j=6;
+         j=9;
+        k= 36;
         for(int i=43;i<75;i++) {
             if(p1[i]==true){
-                grid[i]=p1[i];}
-            if(p2[j]==true){
-                grid[i]=p1[j];}
+                grid[k]=true;}
+            else if(p2[j]==true){
+                grid[k]=true;}
             else {
-                grid[i]=false;}
+                grid[k]=false;}
         j++;
+            k++;
         }
         if(p1[42]==true || p2[8]==true ||p2[76]==true){
-            grid[42]=true;
+            grid[35]=true;
         }
         else{
-            grid[42]=false;
+            grid[35]=false;
         }
         if(p2[42]==true || p1[8]==true ||p1[76]==true){
-            grid[8]=true;
+            grid[1]=true;
         }
         else{
-            grid[8]=false;
+            grid[1]=false;
         }
+this.grid =grid;
         return grid;
     }
     public static State first_state(){
@@ -116,85 +121,90 @@ public class State {
         return new State(player1,player2 , grid);
     }
     public  void print_grid(){
-        int i3=8;
-        int i1=9;
-        int i2=75;
-        boolean [] bourd1;
-        bourd1 =player1.getpath();
-//        bourd1 =grid( player1.getpath(), player2.getpath());
-        for (int i = 1; i < 9; i++) {
-           System.out.println("                                               "+bourd1[i1]+"    "+bourd1[i]+"    "+bourd1[i2]);
-            i1++;
-            i2++;
-            i3--;
-        }
-        i1=24;
-        i3=67;
-        for (int i = 1; i < 9; i++) {
-            System.out.print(bourd1[i1]+" ");
-            i1--;
-
-        }
-        System.out.print("                       ");
-        for (int i = 1; i < 9; i++) {
-            System.out.print(bourd1[i3]+" ");
-            i3--;
-
-        }
-        System.out.println();
-        System.out.println(bourd1[25]+"                                                                                                            "+bourd1[59]);
-        i1=26;
-        i3=51;
-        for (int i = 1; i < 9; i++) {
-            System.out.print(bourd1[i1]+" ");
-            i1--;
-
-        }
-        System.out.print("                       ");
-        for (int i = 1; i < 9; i++) {
-            System.out.print(bourd1[i3]+" ");
-            i3--;
-        }
-        i1=26;
-        i2=50;
-        System.out.println();
-        for (int i = 1; i < 8; i++) {
-            System.out.println("                                               "+bourd1[i1]+"             "+bourd1[i2]);
-            i1++;
-            i2--;
-        }
-        System.out.println("                                               "+bourd1[75]+"    "+bourd1[42]+"    "+bourd1[43]);
-
-
+//        boolean [] bourd1;
 //        boolean [] bourd2;
-//        bourd2 = this.player2.getpath();
-//        for (int i = 1; i < 84; i++) {
-////            if(bourd1[i]==true){
-////                this.grid[i]=true;
-////            }
-////            else if(bourd2[i]==true){
-////                this.grid[i]=true;
-////            }
-////            else{
-////                this.grid[i]=false;
-////            }
+//        bourd2 =player1.getpath();
+//        boolean [] bourd3;
+//        bourd3 =player2.getpath();
+//        bourd1 =grid( this.player1.getpath(), this.player2.getpath());
+//        for(int i=1 ;i<8;i++){
+//            System.out.print(bourd2[i]+"  ");
+//        }
+//        System.out.println();
+//        for(int i=1 ;i<68;i++){
 //            System.out.print(bourd1[i]+"  ");
 //        }
 //        System.out.println();
-//        for (int i = 1; i < 84; i++) {
-////            if(bourd1[i]==true){
-////                this.grid[i]=true;
-////            }
-////            else if(bourd2[i]==true){
-////                this.grid[i]=true;
-////            }
-////            else{
-////                this.grid[i]=false;
-//            }
-
-
-//            System.out.print(bourd2[i]+"  ");
+//        for(int i=1 ;i<84;i++){
+//            System.out.print(bourd3[i]+"  ");
 //        }
+        int i3=7;
+        int i1=3;
+        int i2=67;
+        int i4=77;
+        boolean [] bourd1;
+        boolean [] bourd2;
+        bourd2 =player1.getpath();
+        boolean [] bourd3;
+        bourd3 =player2.getpath();
+        bourd1 =grid( this.player1.getpath(), this.player2.getpath());
+        System.out.println("                                               "+bourd1[2]+"    "+bourd2[8]+"    "+bourd1[68]);
+
+        for (int i = 1; i < 8; i++) {
+            if(bourd2[i3]==true|| bourd2[i4]==true ) {
+                System.out.println("                                               " + bourd1[i1] + "    " + "true" + "    " + bourd1[i2]);
+            }
+            else {
+                System.out.println("                                               " + bourd1[i1] + "    " + "false" + "    " + bourd1[i2]);
+            }
+           i1++;
+            i2--;
+            i3--;
+            i4++;
+        }
+        i1=17;
+        i3=60;
+        for (int i = 1; i < 9; i++) {
+            System.out.print(bourd1[i1]+" ");
+            i1--;
+
+        }
+        System.out.print("                       ");
+        for (int i = 1; i < 9; i++) {
+            System.out.print(bourd1[i3]+" ");
+            i3--;
+
+        }
+        System.out.println();
+        System.out.println(bourd1[18]+"                                                                                                            "+bourd1[52]);
+        i1=19;
+        i3=44;
+        for (int i = 1; i < 9; i++) {
+            System.out.print(bourd1[i1]+" ");
+            i1++;
+
+        }
+        System.out.print("                       ");
+        for (int i = 1; i < 9; i++) {
+            System.out.print(bourd1[i3]+" ");
+            i3++;
+        }
+        i1=27;
+        i2=43;
+i4=83;
+        System.out.println();
+        for (int i = 1; i < 8; i++) {
+            if(bourd3[i]==true|| bourd3[i4]==true ) {
+                System.out.println("                                               " + bourd1[i1] + "    " + "true" + "    " + bourd1[i2]);
+            }
+            else {
+                System.out.println("                                               " + bourd1[i1] + "    " +"false"+ "    " + bourd1[i2]);
+            }
+            i1++;
+            i2--;
+            i4--;
+        }
+        System.out.println("                                               "+bourd1[75]+"    "+bourd3[8]+"    "+bourd1[43]);
 
     }
     public String Dice(){
@@ -205,13 +215,20 @@ public class State {
     }
     public State play(State state ,Player player){
         String dice = Dice();
-        boolean [] cheak= {cheak (num(dice),player.getStone1()),cheak (num(dice),player.getStone2()),
-                cheak (num(dice),player.getStone3()),cheak (num(dice),player.getStone4()) };
+        boolean [] cheak= {cheak (num(dice),player.getStone1(),player),cheak (num(dice),player.getStone2(),player),
+                cheak (num(dice),player.getStone3(),player),cheak (num(dice),player.getStone4(),player) };
         System.out.println("you can move  this stone");
-        for(int i=0; i<4;i++){
+       int count =0;
+        for(int i=0 ; i<4 ; i++){
             if(cheak[i]==true){
                 System.out.println("cleak "+(i+1)+"if youwant to move stone num"+(i+1));
-            }}
+            }
+            else{
+        count++;}
+        }
+        if(count ==4){
+            return state;
+        }
         Scanner scanner = new Scanner(System.in);
         int entry = scanner.nextInt();
         Position stone = null;
@@ -250,12 +267,12 @@ return new_state;
 
         boolean path []= player.getpath();
         path[new_position] = true;
-        if(new_position>=8){
-        grid[new_position]=true;
-        }
+//        if(new_position>=8){
+//        grid[new_position]=true;
+//        }
         if(player.getStone1().getPosition() !=old_position && player.getStone2().getPosition() !=old_position && player.getStone3().getPosition() !=old_position  && player.getStone4().getPosition() !=old_position ) {
             path[old_position] = false;
-            grid[new_position]=false;
+//            grid[new_position]=false;
         }
         State new_state = new State(state);
         new_state.player(player).setpath(path);
@@ -279,15 +296,17 @@ return new_state;
 ////        path[new_position] = true;
 ////        player.setpath(path);
 //    }
-    public boolean cheak(int result,Position stone ){
+    public boolean cheak(int result,Position stone, Player player ){
         int [] pro ={11,22,28,39,45,56,62,73};
+        int [] grid1 ={4,15,21,32,38,49,55,66};
         boolean can_move  = true;
 //        stone.setPosition(10);
 //        System.out.println(stone.getPosition());
 //        System.out.println(stone.getPosition()+result);
 
         for(int i=0 ; i<7; i++){
-            if(stone.getPosition()+result == pro[i] )
+            int j =grid1[i];
+            if(stone.getPosition()+result == pro[i] && player.getpath()[pro[i]]!=true  && getgrid()[j]==true )
             {
 //                System.out.println(pro[i] + "t");
                 can_move = false;
@@ -304,9 +323,9 @@ return new_state;
 //                }}
 
 
-//        if((stone.getPosition()+result)>83){
-//            can_move = false;
-//        }
+        if((stone.getPosition()+result)>83){
+            can_move = false;
+        }
 
 
         return can_move;
