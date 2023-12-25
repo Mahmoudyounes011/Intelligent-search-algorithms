@@ -42,9 +42,34 @@ this.stone3 =stone3;
 this.stone4 =stone4;
 this.path = path;
     }
+    public Player (Player player){
+        this.stone1 =new Position(player.stone1) ;
+        this.stone2=new Position(player.stone2);
+        this.stone3 =new Position(player.stone3);
+        this.stone4 =new Position(player.stone4);
+//        this.path = new boolean [84];
+//        this.player2 = new int [10];
+//        player1 = state.player1.clone();
+        this.path =  player.path.clone();
+    }
     public  boolean [] getpath(){return this.path;}
     public  void  setpath( boolean [] path){ this.path=path;}
+    public  Position getstone(Position position){
+     if(position ==stone1){
+         return stone1;
+     }
+        else if(position ==stone2){
+            return stone2
+                    ;
+        }
+     else if(position ==stone3){
+         return stone3;
+     }
+     else {
+         return stone4;
+     }
 
+    }
 //
 //    public boolean move(int result,Position stone ){
 //        int [] pro ={11,22,28,39,45,56,62,73};

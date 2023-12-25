@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -39,12 +40,12 @@ public class State {
         this.grid = grid;
     }
     public State(State state) {
-        this.grid = new boolean [84];
+//        this.grid = new boolean [84];
 //        this.player2 = new int [10];
 //        player1 = state.player1.clone();
-        grid = state.grid.clone();
-        this.player1=state.getplayer1();
-        this.player2=state.getplayer2();
+        this.grid = state.grid.clone();
+        this.player1=new Player(state.getplayer1());
+        this.player2=new Player(state.getplayer2());
 //        player1.setpath(path1);
 //        player2.setpath(path2);
 
@@ -121,35 +122,17 @@ this.grid =grid;
         return new State(player1,player2 , grid);
     }
     public  void print_grid(){
-//        boolean [] bourd1;
-//        boolean [] bourd2;
-//        bourd2 =player1.getpath();
-//        boolean [] bourd3;
-//        bourd3 =player2.getpath();
-//        bourd1 =grid( this.player1.getpath(), this.player2.getpath());
-//        for(int i=1 ;i<8;i++){
-//            System.out.print(bourd2[i]+"  ");
-//        }
-//        System.out.println();
-//        for(int i=1 ;i<68;i++){
-//            System.out.print(bourd1[i]+"  ");
-//        }
-//        System.out.println();
-//        for(int i=1 ;i<84;i++){
-//            System.out.print(bourd3[i]+"  ");
-//        }
         int i3=7;
         int i1=3;
         int i2=67;
         int i4=77;
         boolean [] bourd1;
         boolean [] bourd2;
-        bourd2 =player1.getpath();
+        bourd2 =this.player1.getpath();
         boolean [] bourd3;
-        bourd3 =player2.getpath();
-        bourd1 =grid( this.player1.getpath(), this.player2.getpath());
-        System.out.println("                                               "+bourd1[2]+"    "+bourd2[8]+"    "+bourd1[68]);
-
+        bourd3 =this.player2.getpath();
+        bourd1 =this.grid( this.player1.getpath(), this.player2.getpath());
+        System.out.println("                                               " + bourd1[2] + "    " + bourd1[1] + "    " + bourd1[68]);
         for (int i = 1; i < 8; i++) {
             if(bourd2[i3]==true|| bourd2[i4]==true ) {
                 System.out.println("                                               " + bourd1[i1] + "    " + "true" + "    " + bourd1[i2]);
@@ -204,19 +187,32 @@ i4=83;
             i2--;
             i4--;
         }
-        System.out.println("                                               "+bourd1[75]+"    "+bourd3[8]+"    "+bourd1[43]);
+        System.out.println("                                               "+bourd1[75]+"    "+bourd1[35]+"    "+bourd1[43]);
+    }
+//    public String Dice(){
+//        String[] values = {"دست", "شكة", "دواق",  "تلاتة" ,"اربعة","بنج","بارا"} ;
+//        Random random = new Random();
+//        int index = random.nextInt(values.length);
+//        return values[index];
+//    }
+public static <T> T Dice() {
+    List<String> options = List.of("دست", "دواق", "تلاتة", "اربعة","بارا","شكة","بنج");
+    List<Double> probabilities = List.of(0.5, 0.2, 0.1, 0.1,0.4,0.5,0.6);
+    double rand = Math.random();
+    double cumulativeProb = 0;
+    for (int i = 0; i < options.size(); i++) {
+        cumulativeProb += probabilities.get(i);
+        if (rand <= cumulativeProb) {
+            return (T) options.get(i);
+        }
+    }
 
-    }
-    public String Dice(){
-        String[] values = {"دست", "شكة", "دواق",  "تلاتة" ,"اربعة","بنج","بارا"} ;
-        Random random = new Random();
-        int index = random.nextInt(values.length);
-        return values[index];
-    }
-    public State play(State state ,Player player){
+    return null;
+}
+    public State play(State state ,int player){
         String dice = Dice();
-        boolean [] cheak= {cheak (num(dice),player.getStone1(),player),cheak (num(dice),player.getStone2(),player),
-                cheak (num(dice),player.getStone3(),player),cheak (num(dice),player.getStone4(),player) };
+        boolean [] cheak= {cheak (num(dice),player(player).getStone1(),player),cheak (num(dice),player(player).getStone2(),player),
+                cheak (num(dice),player(player).getStone3(),player),cheak (num(dice),player(player).getStone4(),player) };
         System.out.println("you can move  this stone");
        int count =0;
         for(int i=0 ; i<4 ; i++){
@@ -227,107 +223,93 @@ i4=83;
         count++;}
         }
         if(count ==4){
+          //add if final
             return state;
         }
         Scanner scanner = new Scanner(System.in);
         int entry = scanner.nextInt();
-        Position stone = null;
+        Position stone = new Position();
+        State new_state = new State(state);
         switch (entry) {
             case 1:
-                stone =player.getStone1();
+                stone =new_state.player(player).getStone1();
                 break;
             case 2:
-                stone= player.getStone2();
+                stone= new_state.player(player).getStone2();
                 break;
             case 3:
-                stone =player.getStone3();
+                stone =new_state.player(player).getStone3();
                 break;
             case 4:
-                stone =player.getStone4();
+                stone =new_state.player(player).getStone4();
                 break;
+            default:
+                new_state.play(new_state , player);
         }
-
         //استدعاء تابع التحريك
-
-
-State new_state =    move(state , num(dice),stone, player);
+//if(dice=="دست"||dice=="بنج"){}
+ new_state = move(new_state , num(dice),stone,player);
 return new_state;
-//        stone.setPosition(10);
-//        System.out.print(this.move(1,stone ));
-
-
     }
-    public State move(State state, int result ,Position stone , Player player){
+//    public Position c (int player){
+//        Scanner scanner = new Scanner(System.in);
+//        int entry = scanner.nextInt();
+//        Position stone = new Position();
+////        State new_state = new State(state);
+//        switch (entry) {
+//            case 1:
+//                stone =this.player(player).getStone1();
+//                break;
+//            case 2:
+//                stone= this.player(player).getStone2();
+//                break;
+//            case 3:
+//                stone =this.player(player).getStone3();
+//                break;
+//            case 4:
+//                stone =this.player(player).getStone4();
+//                break;
+//            default:
+//                this.play(new_state , player);
+//        }
+//    }
+    public State move(State new_state, int result ,Position stone , int player){
         System.out.println(result);
         int old_position =stone.getPosition();
         int new_position = old_position + result;
-//        System.out.println(old_position);
-        stone.setPosition(new_position);
-//        grid[(stone.getPosition())]=true;
-
-        boolean path []= player.getpath();
+        new_state.player(player).getstone(stone).setPosition(new_position);
+        boolean path []= new_state.player(player).getpath();
         path[new_position] = true;
-//        if(new_position>=8){
-//        grid[new_position]=true;
-//        }
-        if(player.getStone1().getPosition() !=old_position && player.getStone2().getPosition() !=old_position && player.getStone3().getPosition() !=old_position  && player.getStone4().getPosition() !=old_position ) {
+        if(new_state.player(player).getStone1().getPosition() !=old_position && new_state.player(player).getStone2().getPosition() !=old_position && new_state.player(player).getStone3().getPosition() !=old_position  && new_state.player(player).getStone4().getPosition() !=old_position ) {
             path[old_position] = false;
-//            grid[new_position]=false;
         }
-        State new_state = new State(state);
         new_state.player(player).setpath(path);
         return new_state;
-//            grid[(old_position)]= false;
-//        }
-
     }
 
-//    private Player player(Player player) {
-//
-//    }
-
-    public Player player (Player player){
-        if(player == this.player1)
-            return player1;
-        else return player2;
+    public Player player (int player){
+        if(player == 1)
+            return this.player1;
+        else return this.player2;
     }
-//    public State change(State state , int old_position ,int new_position){
-////        boolean path []= player.getpath();
-////        path[new_position] = true;
-////        player.setpath(path);
-//    }
-    public boolean cheak(int result,Position stone, Player player ){
+    public boolean cheak(int result,Position stone, int player ){
         int [] pro ={11,22,28,39,45,56,62,73};
         int [] grid1 ={4,15,21,32,38,49,55,66};
         boolean can_move  = true;
-//        stone.setPosition(10);
-//        System.out.println(stone.getPosition());
-//        System.out.println(stone.getPosition()+result);
-
         for(int i=0 ; i<7; i++){
             int j =grid1[i];
-            if(stone.getPosition()+result == pro[i] && player.getpath()[pro[i]]!=true  && getgrid()[j]==true )
+            if(stone.getPosition()+result == pro[i] && player(player).getpath()[pro[i]]!=true  && getgrid()[j]==true )
             {
-//                System.out.println(pro[i] + "t");
                 can_move = false;
-//                System.out.println(pro[i] + "f");
                 break;
-
-            }}
-
-//            for(int p :pro){
-//                if((stone.getPosition()+result)==p && player1.getpath()[(stone.getPosition()+result+34)]==true);
-//                {
-//                    can_move = false;
-//                    break;
-//                }}
-
-
+            }
+        }
         if((stone.getPosition()+result)>83){
             can_move = false;
         }
-
-
+       if(stone.getPosition()==0 && result!=1){
+           can_move=false;
+       }
         return can_move;
     }
 
@@ -366,117 +348,4 @@ return new_state;
         return num;
     }
 
-////    public State  state(State state)
-////    {
-////        return state;
-////    }
-//    public String Dice(){
-//        String[] values = {"دست", "شكة", "دواق",  "تلاتة" ,"اربعة","بنج","بارا"} ;
-//        Random random = new Random();
-//        int index = random.nextInt(values.length);
-//        return values[index];
-//    }
-//public void play(int player){
-//    String dice = Dice();
-//   boolean [] cheak= {move(num(dice),play1_stone1,1),move(num(dice),play1_stone2,1),
-//   move(num(dice),play1_stone3,1),
-//move(num(dice),play1_stone4,1)};
-//    System.out.println("you can move this stone");
-//   for(int i=0; i<4;i++){
-//       if(cheak[i]==true){
-//           System.out.println("cleak "+(i+1)+"if youwant to move stone num"+(i+1));
-//       }}
-//    Scanner scanner = new Scanner(System.in);
-//    int stone = scanner.nextInt();
-//    Position move = null;
-//    switch (stone) {
-//        case 1:
-//            if(player==1)
-//                move =play1_stone1;
-//            else
-//                move =play2_stone1;
-//            break;
-//        case 2:
-//            if(player==1)
-//                move =play1_stone2;
-//            else
-//                move =play2_stone2;
-//            break;
-//        case 3:
-//            if(player==1)
-//                move =play1_stone3;
-//            else
-//                move =play2_stone3;
-//            break;
-//        case 4:
-//            if(player==1)
-//                move =play1_stone4;
-//            else
-//                move =play2_stone4;
-//            break;
-//    }
-//
-//    //استدعاء تابع التحريك
-////    move(num(dice),move, player);
-//
-//     move.setPosition(10);
-//    System.out.print(this.move(1,move,1));
-//
-//
-//    }
-//
-//    public boolean move(int result,Position stone,int player){
-//        int [] pro ={11,22,28,39,45,56,62,73};
-//        boolean can_move = true;
-////        stone.setPosition(10);
-////        System.out.println(stone.getPosition());
-//        for(int p :pro){
-//
-//        if((stone.getPosition()+result)==p && player2[(stone.getPosition()+result+34)]==1)
-//        {
-//             can_move = false;
-//          break;
-//}}
-//        if((stone.getPosition()+result)>83){
-//            can_move = false;
-//        }
-//        return can_move;
-//    }
-//
-//public int num(String result){
-//int num =0;
-//    switch (result) {
-//        case"دست":
-//            num=10;
-//            break;
-//        case"خال":
-//            num=1;
-//            break;
-//        case"بنج":
-//            num=24;
-//            break;
-//        case"شكة":
-//            num=6;
-//            break;
-//        case"دواق":
-//            num=2;
-//            break;
-//        case"تلاتة":
-//            num=3;
-//            break;
-//        case"اربعة":
-//            num=4;
-//            break;
-//        case"بارا":
-//            num=12;
-//            break;
-//
-//
-//
-//}
-//    return num;
-//    }
-//
-//
-//
 }
