@@ -22,9 +22,9 @@ public class Main {
 //
 //        System.out.println();
 //        state.getplayer2().getStone1().setPosition(10);
-State new_state = new State(state);
+        State new_state = new State(state);
         new_state.print_grid();
-                 System.out.println("");
+        System.out.println("");
 //         System.out.println("1ston1"+"   "+new_state.getplayer1().getStone1().getPosition());
 //         System.out.println("1ston2"+"   "+new_state.getplayer1().getStone2().getPosition());
 //         System.out.println("1ston3"+"   "+new_state.getplayer1().getStone3().getPosition());
@@ -34,29 +34,56 @@ State new_state = new State(state);
 //         System.out.println("2ston3"+"   "+new_state.getplayer2().getStone3().getPosition());
 //         System.out.println("2ston4"+"   "+new_state.getplayer2().getStone4().getPosition());
 //     int i=0;
+//        boolean[] path = new boolean[84];
+//        path[12] = true;
+//        new_state.getplayer1().setpath(path);
+//        new_state.getplayer1().getStone4().setPosition(12);
+//        boolean[] path2 = new boolean[84];
+//        path2[44] = true;
+//        new_state.getplayer2().setpath(path2);
+//        new_state.getplayer2().getStone4().setPosition(44);
+//        new_state.print_grid();
+//        new_state = new_state.play(new_state, 2);
+//        new_state.print_grid();
+//        System.out.println(  new_state.getplayer1().getStone4().getPosition() +"        "+new_state.getplayer2().getStone4().getPosition());
+//
+//        for(int y=0;y<84;y++){
+//            System.out.print(new_state.getplayer1().getpath()[y]+ "   ");
+//        }
+//        System.out.println();
+//        for(int y=0;y<84;y++){
+//            System.out.print(new_state.getplayer2().getpath()[y]+ "   ");
+//        }
+//    }}
+//
         while (true) {
             System.out.println("");
-            System.out.println("1ston1" + "   " + new_state.getplayer1().getStone1().getPosition());
-            System.out.println("1ston2" + "   " + new_state.getplayer1().getStone2().getPosition());
-            System.out.println("1ston3" + "   " + new_state.getplayer1().getStone3().getPosition());
-            System.out.println("1ston4" + "   " + new_state.getplayer1().getStone4().getPosition());
             System.out.println("2ston1" + "   " + new_state.getplayer2().getStone1().getPosition());
             System.out.println("2ston2" + "   " + new_state.getplayer2().getStone2().getPosition());
             System.out.println("2ston3" + "   " + new_state.getplayer2().getStone3().getPosition());
             System.out.println("2ston4" + "   " + new_state.getplayer2().getStone4().getPosition());
-            new_state = new_state.play(new_state, 1);
+            System.out.println("1ston1" + "   " + new_state.getplayer1().getStone1().getPosition());
+            System.out.println("1ston2" + "   " + new_state.getplayer1().getStone2().getPosition());
+            System.out.println("1ston3" + "   " + new_state.getplayer1().getStone3().getPosition());
+            System.out.println("1ston4" + "   " + new_state.getplayer1().getStone4().getPosition());
+
+            new_state = new_state.one(new_state, 2 );
+//            new_state = new_state.one(new_state, 2);
             new_state.print_grid();
 //            a.add(new_state);
             System.out.println("");
-            System.out.println("1ston1" + "   " + new_state.getplayer1().getStone1().getPosition());
-            System.out.println("1ston2" + "   " + new_state.getplayer1().getStone2().getPosition());
-            System.out.println("1ston3" + "   " + new_state.getplayer1().getStone3().getPosition());
-            System.out.println("1ston4" + "   " + new_state.getplayer1().getStone4().getPosition());
             System.out.println("2ston1" + "   " + new_state.getplayer2().getStone1().getPosition());
             System.out.println("2ston2" + "   " + new_state.getplayer2().getStone2().getPosition());
             System.out.println("2ston3" + "   " + new_state.getplayer2().getStone3().getPosition());
             System.out.println("2ston4" + "   " + new_state.getplayer2().getStone4().getPosition());
-            new_state = new_state.play(new_state, 2);
+            System.out.println("1ston1" + "   " + new_state.getplayer1().getStone1().getPosition());
+            System.out.println("1ston2" + "   " + new_state.getplayer1().getStone2().getPosition());
+            System.out.println("1ston3" + "   " + new_state.getplayer1().getStone3().getPosition());
+            System.out.println("1ston4" + "   " + new_state.getplayer1().getStone4().getPosition());
+
+            new_state = new_state.one(new_state, 1);
+//            new_state = new_state.one(new_state, 1);
+
             new_state.print_grid();
 //            a.add(new_state);
 //            i = i + 2;
