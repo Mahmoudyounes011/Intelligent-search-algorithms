@@ -93,6 +93,21 @@ this.grid =grid;
         return grid;
     }
   //print board
+public void row ( boolean  board1,boolean  board2,boolean  board3){
+    System.out.println("                                                       | " + board1 +"   |  "  + board2 + "  |  "  + board3+" |");
+    System.out.println("                                                       "+"|_________|_________|________|"+"                                               ");
+
+    }
+    public void col ( boolean  board1){
+ System.out.print(board1+"| ");
+        System.out.println("|_____|______|______|______|______|______|______|______|                            |_____|______|______|______|______|______|______|______|");
+
+    }
+    public void col1 (){
+//        System.out.print(board1+"| ");
+        System.out.println("|_____|______|______|______|______|______|______|______|                            |_____|______|______|______|______|______|______|______|");
+
+    }
     public  void print_grid(){
         int i3=7;
         int i1=3;
@@ -104,13 +119,23 @@ this.grid =grid;
         boolean [] board3;
         board3 =this.player2.getpath();
         board1 =this.grid( this.player1.getpath(), this.player2.getpath());
-        System.out.println("                                               " + board1[2] + "    " + board1[1] + "    " + board1[68]);
+        System.out.println("                                                       "+"_____________________________"+"                                               ");
+        row(board1[2] ,board1[1],board1[68]);
+//        System.out.println("                                                       | " + board1[2] +"   |  "  + board1[1] + "  |  "  + board1[68]+" |");
+//        System.out.println("                                                       "+"|_________|_________|________|"+"                                               ");
         for (int i = 1; i < 8; i++) {
             if(board2[i3]==true|| board2[i4]==true ) {
-                System.out.println("                                               " + board1[i1] + "    " + "true" + "    " + board1[i2]);
+                row(board1[i1] ,true,board1[i2]);
+//                System.out.println("                                                        |" + board1[i1] +"  |  "+ "true" +"  |  " + board1[i2]+" |");
+//                System.out.println("                                                       "+"|_________|_________|________|"+"                                               ");
+
+//            "                                                        "
             }
             else {
-                System.out.println("                                               " + board1[i1] + "    " + "false" + "    " + board1[i2]);
+                row(board1[i1] ,false,board1[i2]);
+//                System.out.println("                                                       |" + board1[i1] + "  |  " + "false" + "  |  " + board1[i2]+" |");
+//                System.out.println("                                                       "+"|_________|_________|________|"+"                                               ");
+
             }
             i1++;
             i2--;
@@ -119,47 +144,69 @@ this.grid =grid;
         }
         i1=17;
         i3=60;
+        System.out.print("|");
         for (int i = 1; i < 9; i++) {
-            System.out.print(board1[i1]+" ");
+//            System.out.print(board1[i1]+"| ");
+col(board1[i1]);
             i1--;
 
         }
-        System.out.print("                       ");
+        System.out.print("                           |");
+
         for (int i = 1; i < 9; i++) {
-            System.out.print(board1[i3]+" ");
+
+            col(board1[i3]);
             i3--;
+
 
         }
         System.out.println();
-        System.out.println(board1[18]+"                                                                                                            "+board1[52]);
+//        System.out.println("|_____|______|______|______|______|______|______|______|                            |_____|______|______|______|______|______|______|______|");
+        col1();
+        System.out.println("|"+board1[18]+"|      |      |      |      |      |      |      |                            |     |      |      |      |      |      |      |"+board1[52]+" |");
+//        System.out.println();
+//        System.out.println("|_____|______|______|______|______|______|______|______|                            |_____|______|______|______|______|______|______|______|");
+        col1();
         i1=19;
         i3=44;
+        System.out.print("|");
         for (int i = 1; i < 9; i++) {
-            System.out.print(board1[i1]+" ");
+//            System.out.print(board1[i1]+"| ");
+            col(board1[i1]);
             i1++;
 
         }
-        System.out.print("                       ");
+        System.out.print("                           |");
         for (int i = 1; i < 9; i++) {
-            System.out.print(board1[i3]+" ");
+//            System.out.print(board1[i3]+"| ");
+            col(board1[i3]);
             i3++;
         }
         i1=27;
         i2=43;
         i4=83;
         System.out.println();
+//        System.out.println("|_____|______|______|______|______|______|______|______|                            |_____|______|______|______|______|______|______|______|");
+        col1();
         for (int i = 1; i < 8; i++) {
             if(board3[i]==true|| board3[i4]==true ) {
-                System.out.println("                                               " + board1[i1] + "    " + "true" + "    " + board1[i2]);
+//                System.out.println("                                               |  " + board1[i1] +"  |  " + "true" +"  |  " + board1[i2]+" |");
+//                System.out.println("                                               "+"|____________________________|"+"                                               ");
+                row(board1[i1],true,board1[i2]);
             }
             else {
-                System.out.println("                                               " + board1[i1] + "    " +"false"+ "    " + board1[i2]);
+//                System.out.println("                                               |  " + board1[i1] + "  |  " +"false"+"  |  "  + board1[i2]+" |");
+//                System.out.println("                                               "+"|____________________________|"+"                                               ");
+                row(board1[i1],false,board1[i2]);
             }
             i1++;
             i2--;
             i4--;
         }
-        System.out.println("                                               "+board1[75]+"    "+board1[35]+"    "+board1[43]);
+//        System.out.println("                                               |  " +board1[75]+"  |  "  +board1[35]+"  |  "  +board1[43]+" |");
+       row(board1[75],board1[35],board1[43]);
+//        System.out.println("                                               "+"|____________________________|"+"                                               ");
+
     }
     //first state
     public static State first_state(){
@@ -306,10 +353,12 @@ this.grid =grid;
                 break;
             }
             else {
-                dices.add(dice);
-                dice =Dice();
+                if(dice ==  "بنج"||dice ==  "دست"){
+                    dices.add(dice);
+                    dices.add("خال");
+                    dice =Dice();
         }
-        }
+        }}
         for ( int i = 0; i < dices.size(); i++) {
             System.out.print(dices.get(i) +"  ,  ");
         }
@@ -319,16 +368,13 @@ this.grid =grid;
         if(state.player(player).getStone1().getPosition()==0 &&state.player(player).getStone2().getPosition()==0 &&state.player(player).getStone3().getPosition()==0 &&state.player(player).getStone4().getPosition()==0 ) {
             int old_size = dices.size();
             for (int i = 0; i < dices.size(); i++) {
-                if (dices.get(i) == "دست") {
-                    new_state = dest(new_state,player);
+                if (dices.get(i) == "خال") {
+                    System.out.println("خال");
+                    new_state = new_state.Human_play(new_state, player, (String) dices.get(i));
                     dices.remove(i);
                     break;
                 }
-                else if (dices.get(i) == "بنج") {
-                    new_state = banj(new_state,player);
-                    dices.remove(i);
-                    break;
-                }
+
                 }
             int new_size = dices.size();
             if(old_size == new_size){
@@ -347,19 +393,11 @@ this.grid =grid;
             }
             int entry = scanner.nextInt();
             if (entry >= 1 && entry < dices.size()+1){
-                if (dices.get(entry-1) == "دست") {
-                    new_state = dest(new_state,player);
-                    dices.remove(entry-1);
-                }
-                else if (dices.get(entry-1) == "بنج") {
-                    new_state = banj(new_state,player);
-                    dices.remove(entry-1);
-                }
-                else {
+
                     System.out.println(dices.get(entry-1));
                     new_state = new_state.Human_play(new_state, player, (String) dices.get(entry-1));
                     dices.remove(entry-1);
-                }
+
                 }}
         return new_state;
         }
