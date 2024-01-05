@@ -6,9 +6,9 @@ import java.util.Scanner;
 public class State {
     private Player  player1 ;
     private Player  player2 ;
-    private  boolean [] grid;
+    private  String [] grid;
     Scanner scanner = new Scanner(System.in);
-    public State( Player player1 , Player player2,boolean [] grid) {
+    public State( Player player1 , Player player2,String [] grid) {
         this.player1=player1 ;
         this.player2=player2 ;
         this.grid = grid;
@@ -28,7 +28,7 @@ public class State {
     {
         return player2;
     }
-    public boolean [] getgrid()
+    public String [] getgrid()
     {
         return this.grid;
     }
@@ -40,7 +40,7 @@ public class State {
     {
         this.player2 = player2;
     }
-    public void setplayer2(boolean [] grid)
+    public void setplayer2(String [] grid)
     {
         this.grid = grid;
     }
@@ -51,164 +51,58 @@ public class State {
         else  return this.player1;
     }
     // join path of player1 with path of player2
-    public boolean[] grid(boolean[] p1,boolean[]p2){
-        boolean[] grid = new boolean[85];
+    public String[] grid(boolean[] p1,boolean[]p2){
+        String [] grid = this.grid;
         int j=43;
         int k=2;
         for(int i=9;i<42;i++) {
-            if(p1[i]==true){
-            grid[k]=true;}
-            else if(p2[j]==true){
-                grid[k]=true;}
-            else {
-                grid[k]=false;}
+            if(p1[i]){
+            grid[k]= "   X ";}
+            else if(p2[j]){
+                grid[k]="  O  ";}
+            else{
+                grid[k]="     ";
+            }
             j++;
             k++;
         }
          j=9;
         k= 36;
         for(int i=43;i<75;i++) {
-            if(p1[i]==true){
-                grid[k]=true;}
-            else if(p2[j]==true){
-                grid[k]=true;}
-            else {
-                grid[k]=false;}
+            if(p1[i]){
+                grid[k]="  X  ";}
+            else if(p2[j]){
+                grid[k]="  O  ";}
+            else{
+                grid[k]="     ";
+            }
         j++;
             k++;
         }
-        if(p1[42]==true || p2[8]==true ||p2[76]==true){
-            grid[35]=true;
+
+        if(p1[42]){
+            grid[35]="  X  ";
+        }
+        else if ( p2[8] ||p2[76]){
+            grid[35]="  O  ";
         }
         else{
-            grid[35]=false;
+            grid[35]="     ";
         }
-        if(p2[42]==true || p1[8]==true ||p1[76]==true){
-            grid[1]=true;
+        if(p2[42]){
+
+            grid[1]="  X  ";
+        }
+        else if( p1[8] ||p1[76]){
+            grid[1]="  O  ";
         }
         else{
-            grid[1]=false;
+            grid[1]="     ";
         }
-this.grid =grid;
+       this.grid =grid;
         return grid;
     }
-  //print board
-public void row ( boolean  board1,boolean  board2,boolean  board3){
-    System.out.println("                                                       | " + board1 +"   |  "  + board2 + "  |  "  + board3+" |");
-    System.out.println("                                                       "+"|_________|_________|________|"+"                                               ");
 
-    }
-    public void col ( boolean  board1){
- System.out.print(board1+"| ");
-        System.out.println("|_____|______|______|______|______|______|______|______|                            |_____|______|______|______|______|______|______|______|");
-
-    }
-    public void col1 (){
-//        System.out.print(board1+"| ");
-        System.out.println("|_____|______|______|______|______|______|______|______|                            |_____|______|______|______|______|______|______|______|");
-
-    }
-    public  void print_grid(){
-        int i3=7;
-        int i1=3;
-        int i2=67;
-        int i4=77;
-        boolean [] board1;
-        boolean [] board2;
-        board2 =this.player1.getpath();
-        boolean [] board3;
-        board3 =this.player2.getpath();
-        board1 =this.grid( this.player1.getpath(), this.player2.getpath());
-        System.out.println("                                                       "+"_____________________________"+"                                               ");
-        row(board1[2] ,board1[1],board1[68]);
-//        System.out.println("                                                       | " + board1[2] +"   |  "  + board1[1] + "  |  "  + board1[68]+" |");
-//        System.out.println("                                                       "+"|_________|_________|________|"+"                                               ");
-        for (int i = 1; i < 8; i++) {
-            if(board2[i3]==true|| board2[i4]==true ) {
-                row(board1[i1] ,true,board1[i2]);
-//                System.out.println("                                                        |" + board1[i1] +"  |  "+ "true" +"  |  " + board1[i2]+" |");
-//                System.out.println("                                                       "+"|_________|_________|________|"+"                                               ");
-
-//            "                                                        "
-            }
-            else {
-                row(board1[i1] ,false,board1[i2]);
-//                System.out.println("                                                       |" + board1[i1] + "  |  " + "false" + "  |  " + board1[i2]+" |");
-//                System.out.println("                                                       "+"|_________|_________|________|"+"                                               ");
-
-            }
-            i1++;
-            i2--;
-            i3--;
-            i4++;
-        }
-        i1=17;
-        i3=60;
-        System.out.print("|");
-        for (int i = 1; i < 9; i++) {
-//            System.out.print(board1[i1]+"| ");
-col(board1[i1]);
-            i1--;
-
-        }
-        System.out.print("                           |");
-
-        for (int i = 1; i < 9; i++) {
-
-            col(board1[i3]);
-            i3--;
-
-
-        }
-        System.out.println();
-//        System.out.println("|_____|______|______|______|______|______|______|______|                            |_____|______|______|______|______|______|______|______|");
-        col1();
-        System.out.println("|"+board1[18]+"|      |      |      |      |      |      |      |                            |     |      |      |      |      |      |      |"+board1[52]+" |");
-//        System.out.println();
-//        System.out.println("|_____|______|______|______|______|______|______|______|                            |_____|______|______|______|______|______|______|______|");
-        col1();
-        i1=19;
-        i3=44;
-        System.out.print("|");
-        for (int i = 1; i < 9; i++) {
-//            System.out.print(board1[i1]+"| ");
-            col(board1[i1]);
-            i1++;
-
-        }
-        System.out.print("                           |");
-        for (int i = 1; i < 9; i++) {
-//            System.out.print(board1[i3]+"| ");
-            col(board1[i3]);
-            i3++;
-        }
-        i1=27;
-        i2=43;
-        i4=83;
-        System.out.println();
-//        System.out.println("|_____|______|______|______|______|______|______|______|                            |_____|______|______|______|______|______|______|______|");
-        col1();
-        for (int i = 1; i < 8; i++) {
-            if(board3[i]==true|| board3[i4]==true ) {
-//                System.out.println("                                               |  " + board1[i1] +"  |  " + "true" +"  |  " + board1[i2]+" |");
-//                System.out.println("                                               "+"|____________________________|"+"                                               ");
-                row(board1[i1],true,board1[i2]);
-            }
-            else {
-//                System.out.println("                                               |  " + board1[i1] + "  |  " +"false"+"  |  "  + board1[i2]+" |");
-//                System.out.println("                                               "+"|____________________________|"+"                                               ");
-                row(board1[i1],false,board1[i2]);
-            }
-            i1++;
-            i2--;
-            i4--;
-        }
-//        System.out.println("                                               |  " +board1[75]+"  |  "  +board1[35]+"  |  "  +board1[43]+" |");
-       row(board1[75],board1[35],board1[43]);
-//        System.out.println("                                               "+"|____________________________|"+"                                               ");
-
-    }
-    //first state
     public static State first_state(){
         Position play1_stone1 = new Position();
         Position play1_stone2 = new Position();
@@ -221,28 +115,26 @@ col(board1[i1]);
         boolean[] path1=new boolean[85];
         boolean[] path2= new boolean[85];
 
-        boolean [] grid = new boolean[85];
+        String [] grid = new String[85];
         for (int i = 1; i < 85; i++) {
             path1[i] =false;
             path2[i] =false;
-            grid[i] = false;
+            grid[i]  ="     ";
         }
         Player player1 = new Player (play1_stone1,play1_stone2,play1_stone3,play1_stone4,path1);
         Player player2 = new Player (play2_stone1,play2_stone2,play2_stone3,play2_stone4,path2);
-//        player1.setpath(path1);
-//        player2.setpath(path2);
         return new State(player1,player2 , grid);
     }
     //get random value
-    public static <T> T Dice() {
-        List<String> options = List.of("دست", "دواق", "تلاتة", "اربعة","بارا","شكة","بنج");
+    public static <String> String Dice() {
+        List<String> options = (List<String>) List.of("دست", "دواق", "تلاتة", "اربعة","بارا","شكة","بنج");
         List<Double> probabilities = List.of(0.4, 0.5, 0.1, 0.1,0.1,0.2,0.3);
         double rand = Math.random();
         double cumulativeProb = 0;
         for (int i = 0; i < options.size(); i++) {
             cumulativeProb += probabilities.get(i);
             if (rand <= cumulativeProb) {
-                return (T) options.get(i);
+                return  options.get(i);
             }
         }
 
@@ -286,25 +178,10 @@ col(board1[i1]);
         return false;
     }
    // rolling the dice
-
-    public State dest(State new_state , int player){
-            System.out.println("خال");
-            new_state = new_state.Human_play(new_state, player, "خال");
-            System.out.println("دست");
-            new_state = new_state.Human_play(new_state, player, "دست");
-            return new_state;
-    }
-    public State banj(State new_state , int player){
-        System.out.println("خال");
-        new_state = new_state.Human_play(new_state, player, "خال");
-        System.out.println("بنج");
-        new_state = new_state.Human_play(new_state, player, "بنج");
-        return new_state;
-    }
     public static void play(){
         State state = State.first_state();
         State new_state = new State(state);
-        new_state.print_grid();
+        Grid.print_grid(new_state);
         while (true) {
             System.out.println("");
             System.out.println("player 1 stone 1" + "   " + new_state.getplayer2().getStone1().getPosition());
@@ -317,7 +194,7 @@ col(board1[i1]);
             System.out.println("player 2 stone 4" + "   " + new_state.getplayer1().getStone4().getPosition());
             System.out.println("player 1");
             new_state = new_state.Throw(new_state, 1 );
-            new_state.print_grid();
+            Grid.print_grid(new_state);
             if(new_state.isfinished(1)){
                 System.out.println("player number 2"+  "the Winner");
                 break;
@@ -336,7 +213,7 @@ col(board1[i1]);
             System.out.println("player 2");
             new_state = new_state.Throw(new_state, 2);
 
-            new_state.print_grid();
+            Grid.print_grid(new_state);
             if(new_state.isfinished(2)){
                 System.out.println("player number 1"+  "is the Winner");
                 break;
@@ -495,7 +372,7 @@ col(board1[i1]);
         boolean can_move  = true;
         for(int i=0 ; i<7; i++){
             int j =grid1[i];
-            if(stone.getPosition()+result == pro[i] && player(player).getpath()[pro[i]]!=true  && getgrid()[j]==true )
+            if(stone.getPosition()+result == pro[i] && player(player).getpath()[pro[i]]!=true  && getgrid()[j]!="     " )
             {
                 can_move = false;
                 break;
@@ -511,5 +388,14 @@ col(board1[i1]);
        }
         return can_move;
     }
-
+public ArrayList<State> nextstate(State state , String dice){
+    ArrayList<State> movable = new ArrayList<>();
+    for (int i=0 ; i<4;i++){
+        if(state.check (num(dice),this.player2.getstonefronum(i),2)){
+          State newstate= new State(  move(state,num(dice), this.player2.getstonefronum(i) , 2));
+          movable.add(newstate);
+        }
+    }
+    return movable;
+}
 }
