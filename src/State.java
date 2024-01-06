@@ -392,7 +392,8 @@ public class State {
 public ArrayList<State> nextstate(State state , ArrayList<String> dice){
     ArrayList<State> movable = new ArrayList<>();
     for(String dices : dice){
-    for (int i=0 ; i<4;i++){
+    for (int i=1 ; i<4;i++){
+
         if(state.check (num(dices),this.player2.getstonefronum(i),2)){
           State newstate= new State(  move(state,num(dices), this.player2.getstonefronum(i) , 2));
           movable.add(newstate);
