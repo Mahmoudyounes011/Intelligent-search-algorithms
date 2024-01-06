@@ -220,6 +220,7 @@ public class State {
             }
         }
     }
+
     public State Throw(State state ,int player ){
         ArrayList dices = new ArrayList<String>();
         String dice = Dice();
@@ -236,9 +237,10 @@ public class State {
                     dice =Dice();
         }
         }}
-        for ( int i = 0; i < dices.size(); i++) {
-            System.out.print(dices.get(i) +"  ,  ");
-        }
+        System.out.println(dices.toString());
+//        for ( int i = 0; i < dices.size(); i++) {
+//            System.out.print(dices.get(i) +"  ,  ");
+//        }
         System.out.println();
         State new_state = state;
 // ذا كانو حجارو كلن مو مركبين
@@ -251,7 +253,6 @@ public class State {
                     dices.remove(i);
                     break;
                 }
-
                 }
             int new_size = dices.size();
             if(old_size == new_size){
@@ -388,14 +389,15 @@ public class State {
        }
         return can_move;
     }
-public ArrayList<State> nextstate(State state , String dice){
+public ArrayList<State> nextstate(State state , ArrayList<String> dice){
     ArrayList<State> movable = new ArrayList<>();
+    for(String dices : dice){
     for (int i=0 ; i<4;i++){
-        if(state.check (num(dice),this.player2.getstonefronum(i),2)){
-          State newstate= new State(  move(state,num(dice), this.player2.getstonefronum(i) , 2));
+        if(state.check (num(dices),this.player2.getstonefronum(i),2)){
+          State newstate= new State(  move(state,num(dices), this.player2.getstonefronum(i) , 2));
           movable.add(newstate);
         }
-    }
+    }}
     return movable;
 }
 }

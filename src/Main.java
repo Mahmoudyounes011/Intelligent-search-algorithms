@@ -5,8 +5,12 @@ public class Main {
 
 State.play();
 //State state = State.first_state();
-//        Grid.print_grid(state);
+////        Grid.print_grid(state);
 //ArrayList<State> movable = new ArrayList<>();
+//
+//
+//
+//
 //movable =state.nextstate(state , "خال");
 ////        System.out.println(movable);
 //for (State movables : movable){
