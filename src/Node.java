@@ -15,6 +15,14 @@ public class Node {
         return this.parent == null;
     }
 
+    public boolean isFinish() {
+        int player_number = 0;
+        if (this.type == "computer") {
+            player_number = 2;
+        }
+        return this.state.isfinished(player_number);
+    }
+
     public Node getParent() {
         return parent;
     }
@@ -45,5 +53,15 @@ public class Node {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int heuristic() {
+        if (this.state.isfinished(2)) {
+            return Integer.MAX_VALUE;
+        }
+        if (this.state.isfinished(1)) {
+            return Integer.MIN_VALUE;
+        }
+        return 1;
     }
 }
