@@ -51,6 +51,8 @@ public class Node {
         this.type = type;
     }
 
+    // ! player 2 is the computer max
+    // ! player 1 is the human min
     public int heuristic() {
         if (this.state.isfinished(2)) {
             return Integer.MAX_VALUE;
