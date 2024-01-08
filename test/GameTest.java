@@ -22,7 +22,6 @@ public class GameTest {
         s.getplayer1().getStone3().setPosition(84);
         s.getplayer1().getStone4().setPosition(84);
         System.out.println(s.isfinished(1));
-        System.out.println(s.isfinished(2));
         Node n = new Node("computer", null, s, 0);
         int value = game.expectIMinMax(n, 1, "computer");
         System.out.println(n.heuristic());
