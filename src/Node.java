@@ -16,11 +16,7 @@ public class Node {
     }
 
     public boolean isFinish() {
-        int player_number = 0;
-        if (this.type == "computer") {
-            player_number = 2;
-        }
-        return this.state.isfinished(player_number);
+        return this.state.isfinished(1) || this.state.isfinished(2);
     }
 
     public Node getParent() {
