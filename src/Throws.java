@@ -5,19 +5,19 @@ import java.util.*;
 public class Throws {
     static String[] stones = { "dist", "bnj", "sheqah", "bara", "dowaq", "three", "four" };
     static HashMap<String, Double> stone_probabilities = new HashMap<>();
-    private HashSet<String> throwListItems;
+    private ArrayList<String> throwListItems;
     private double chance;
 
-    public Throws(HashSet<String> t, double chance) {
+    public Throws(ArrayList<String> t, double chance) {
         this.throwListItems = t;
         this.chance = chance;
     }
 
-    public HashSet<String> getThrowListItems() {
+    public ArrayList<String> getThrowListItems() {
         return throwListItems;
     }
 
-    public void setThrowListItems(HashSet<String> t) {
+    public void setThrowListItems(ArrayList<String> t) {
         this.throwListItems = t;
     }
 
@@ -30,7 +30,7 @@ public class Throws {
     }
 
     public static ArrayList<Throws> generateThrows(int current,
-            HashSet<String> throwSequence, ArrayList<Throws> tList,
+            ArrayList<String> throwSequence, ArrayList<Throws> tList,
             double cumulative_prob) {
         if (current == 0) {
             stone_probabilities.put("dist", 0.186624);
@@ -49,21 +49,21 @@ public class Throws {
         }
         for (String stone : stones) {
             double next_prob = stone_probabilities.get(stone);
-            // System.out.println(next_prob);
             if (cumulative_prob * next_prob > 0.000001)
                 if (stone == "dist" || stone == "bnj" || stone == "sheqah" || stone == "bara") {
-                    // throwSequence.add(stone);
-                    HashSet<String> throwItem = new HashSet<String>();
+                    ArrayList<String> throwItem = new ArrayList<String>();
                     throwItem.addAll(throwSequence);
                     throwItem.add(stone);
+                    if (stone == "dist" || stone == "bnj") {
+                        throwItem.add("khal");
+                    }
                     generateThrows(current + 1, throwItem, tList, cumulative_prob * next_prob);
                 } else {
-                    HashSet<String> throwItem = new HashSet<String>();
+                    ArrayList<String> throwItem = new ArrayList<String>();
                     throwItem.addAll(throwSequence);
                     throwItem.add(stone);
                     tList.add(new Throws(throwItem, next_prob * cumulative_prob));
                 }
-            // throwSequence.remove(stone);
         }
         return tList;
     }
