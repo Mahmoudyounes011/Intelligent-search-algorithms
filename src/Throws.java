@@ -42,20 +42,21 @@ public class Throws {
             stone_probabilities.put("four", 0.13824);
         }
         if (current == 10) {
-            if (cumulative_prob > 0.001) {
+            if (cumulative_prob > 0.000001) {
                 tList.add(new Throws(throwSequence, cumulative_prob));
             }
             return tList;
         }
         for (String stone : stones) {
             double next_prob = stone_probabilities.get(stone);
-            if (cumulative_prob * next_prob > 0.001)
+            // System.out.println(next_prob);
+            if (cumulative_prob * next_prob > 0.000001)
                 if (stone == "dist" || stone == "bnj" || stone == "sheqah" || stone == "bara") {
                     // throwSequence.add(stone);
                     HashSet<String> throwItem = new HashSet<String>();
                     throwItem.addAll(throwSequence);
                     throwItem.add(stone);
-                    generateThrows(current + 1, throwItem, tList, cumulative_prob);
+                    generateThrows(current + 1, throwItem, tList, cumulative_prob * next_prob);
                 } else {
                     HashSet<String> throwItem = new HashSet<String>();
                     throwItem.addAll(throwSequence);
