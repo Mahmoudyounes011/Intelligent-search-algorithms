@@ -103,4 +103,11 @@ public class forme {
 //       row(board1[75],board1[35],board1[43]);
 //    }
     //first state
+
+
+
+//    public boolean position(Position stone, int player , int value){
+//        return this.player(player).getStone3().getPosition() == value;
+//
+//    }
 }

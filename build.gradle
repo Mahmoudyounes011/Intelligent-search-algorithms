@@ -1,0 +1,44 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+repositories {
+   mavenCentral()
+}
+
+dependencies {
+   testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+   useJUnitPlatform()
+}
+
+sourceSets {
+   main {
+       java {
+           srcDir 'src'
+       }
+   }
+   test {
+       java {
+           srcDir 'test'
+       }
+   }
+}
+
+jar {
+    manifest{
+        attributes 'Main-Class': 'Main'
+    }
+}
+
+tasks.named('test', Test) {
+    useJUnitPlatform()
+
+    maxHeapSize = '1G'
+
+    testLogging {
+        events "passed"
+    }
+}
