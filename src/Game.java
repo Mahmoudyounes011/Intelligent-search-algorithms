@@ -21,7 +21,8 @@ public class Game {
             toThrowDices = dices;
         }
 
-        ArrayList<State> states = n.getState().nextstate(n.getState(), toThrowDices);
+        // ArrayList<State> states = n.getState().nextstate(n.getState(), toThrowDices);
+        ArrayList<State> states = new ArrayList<>();
         ArrayList<Node> childrenNodes = new ArrayList<>();
         if (n.getType() == "max") {
             for (State state : states) {
