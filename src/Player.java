@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Player {
     private boolean [] path;
-public Position [] stone = new Position[4];
+     public Position [] stone = new Position[4];
     public void setStone1(Position stone1) {
         this.stone[0]= stone1;
     }
