@@ -126,9 +126,9 @@ public class State {
         return new State(player1,player2 , grid);
     }
     //get random value
-    public static <String> String Dice() {
-        List<String> options = (List<String>) List.of("دست", "دواق", "تلاتة", "اربعة","بارا","شكة","بنج");
-        List<Double> probabilities = List.of(0.4, 0.5, 0.1, 0.1,0.1,0.2,0.3);
+    public static  String Dice() {
+        List<String> options =  List.of("دست", "دواق", "تلاتة", "اربعة","بارا","شكة","بنج");
+        List<Double> probabilities = List.of(0.2, 0.1, 0.2, 0.1,0.1,0.2,0.1);
         double rand = Math.random();
         double cumulativeProb = 0;
         for (int i = 0; i < options.size(); i++) {
@@ -172,10 +172,14 @@ public class State {
         return num;
     }
     public boolean isfinished(int player){
-        if(this.player(player).getStone1().getPosition()==84 && this.player(player).getStone2().getPosition()==84 && this.player(player).getStone3().getPosition()==84 && this.player(player).getStone4().getPosition()==84 ){
-            return true;
-        }
-        return false;
+        int j=0;
+        for (int i=1;i<5;i++){
+            if(this.player(player).getstonefronum(i).getPosition()==84) {
+                j++;
+            }}
+         if(j==4)
+             return true;
+         return false;
     }
    // rolling the dice
     public static void play(){
@@ -230,13 +234,15 @@ public class State {
                 dices.add(dice);
                 break;
             }
-            else {
-                if(dice ==  "بنج"||dice ==  "دست"){
+            else if(dice ==  "بنج"||dice ==  "دست"){
                     dices.add(dice);
                     dices.add("خال");
                     dice =Dice();
+
         }
-        }}
+            else
+            dices.add(dice);
+        }
         System.out.println(dices.toString());
 //        for ( int i = 0; i < dices.size(); i++) {
 //            System.out.print(dices.get(i) +"  ,  ");
@@ -333,19 +339,29 @@ public class State {
         new_state.player(player).getstone(stone).setPosition(new_position);
         boolean path []= new_state.player(player).getpath();
         path[new_position] = true;
+
+        for(int i=1 ;i<=4;i++){
+            if(new_state.player(player).getstonefronum(i).getPosition() ==old_position ){
+                break;
+            }
+            if(i==4){
+                path[old_position] = false;
+            }
+
+        }
         if(new_state.player(player).getStone1().getPosition() !=old_position && new_state.player(player).getStone2().getPosition() !=old_position && new_state.player(player).getStone3().getPosition() !=old_position  && new_state.player(player).getStone4().getPosition() !=old_position ) {
             path[old_position] = false;
         }
         new_state.player(player).setpath(path);
         new_state.grid(new_state.player1.getpath(),new_state.player2.getpath());
-        if(new_position<42)
-            new_position =new_position+34;
-            else
-            new_position =new_position-34;
-            if(player == 1)
-                new_state.kill(2,  new_position);
-            else
-                new_state.kill(1, new_position);
+        if(new_position<42){
+            new_position =new_position+34;}
+            else{
+            new_position =new_position-34;}
+            if(player == 1){
+                new_state.kill(2,  new_position);}
+            else{
+                new_state.kill(1, new_position);}
         return new_state;
     }
     public void kill(int player ,int new_position){
@@ -353,20 +369,15 @@ public class State {
             boolean [] path =this.player(player).getpath();
             path[new_position]=false;
             this.player(player).setpath(path);
-            if(this.player(player).getStone1().getPosition()==new_position){
-                this.player(player).getStone1().setPosition(0);
-            }
-            if(this.player(player).getStone2().getPosition()==new_position){
-                this.player(player).getStone2().setPosition(0);
-            }
-            if(this.player(player).getStone3().getPosition()==new_position){
-                this.player(player).getStone3().setPosition(0);
-            }
-            if(this.player(player).getStone4().getPosition()==new_position){
-                this.player(player).getStone4().setPosition(0);
+            for(int i=1; i<=4;i++){
+                if(this.player(player).getstonefronum(i).getPosition()==new_position){
+                    this.player(player).getStone1().setPosition(0);
+                }
             }
         }
 }
+
+
     public boolean check(int result,Position stone, int player ){
         int [] pro ={11,22,28,39,45,56,62,73};
         int [] grid1 ={4,15,21,32,38,49,55,66};
@@ -388,17 +399,26 @@ public class State {
                can_move=false;
        }
         return can_move;
-    }
-public ArrayList<State> nextstate(State state , ArrayList<String> dice){
-    ArrayList<State> movable = new ArrayList<>();
-    for(String dices : dice){
-    for (int i=1 ; i<4;i++){
 
-        if(state.check (num(dices),this.player2.getstonefronum(i),2)){
-          State newstate= new State(  move(state,num(dices), this.player2.getstonefronum(i) , 2));
-          movable.add(newstate);
-        }
-    }}
-    return movable;
-}
+    }
+//public ArrayList<State> nextstate( ArrayList<State> states, String dices){
+//    ArrayList<State> movable = new ArrayList<>();
+//    for(State s: states){
+//        states.remove(s);
+//
+////        State s = new State(this);
+//    for (int i=1 ; i<= 4;i++) {
+//        if (this.check(num(dices), s.player2.getstonefronum(i), 2)) {
+//            State newstate = new State(move(s, num(dices), this.player2.getstonefronum(i), 2));
+//            movable.add(newstate);
+//        }
+//    }}
+//    for(State m: movable) {
+//    states.add(m);
+//    movable.remove(m);
+//    }
+////
+//
+//    return states;
+//}
 }
