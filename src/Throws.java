@@ -29,8 +29,8 @@ public class Throws {
         this.chance = chance;
     }
 
-    public static ArrayList<Throws> generateThrows(int current,
-            ArrayList<String> throwSequence, ArrayList<Throws> tList,
+    public static HashSet<ArrayList<String>> generateThrows(int current,
+            ArrayList<String> throwSequence, HashSet<ArrayList<String>> tList,
             double cumulative_prob) {
         if (current == 0) {
             stone_probabilities.put("dist", 0.186624);
@@ -41,9 +41,12 @@ public class Throws {
             stone_probabilities.put("three", 0.27648);
             stone_probabilities.put("four", 0.13824);
         }
-        if (current == 10) {
+        if (current == 5) {
             if (cumulative_prob > 0.000001) {
-                tList.add(new Throws(throwSequence, cumulative_prob));
+                ArrayList<ArrayList<String>> permutations = getPermutations(throwSequence);
+                for (ArrayList<String> p : permutations) {
+                    tList.add(p);
+                }
             }
             return tList;
         }
@@ -62,7 +65,10 @@ public class Throws {
                     ArrayList<String> throwItem = new ArrayList<String>();
                     throwItem.addAll(throwSequence);
                     throwItem.add(stone);
-                    tList.add(new Throws(throwItem, next_prob * cumulative_prob));
+                    ArrayList<ArrayList<String>> permutations = getPermutations(throwItem);
+                    for (ArrayList<String> p : permutations) {
+                        tList.add(p);
+                    }
                 }
         }
         return tList;

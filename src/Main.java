@@ -44,14 +44,10 @@ public class Main {
                 // System.out.println("Element at index " + i + " : " + resultList[i]);
                 // }
 
-                ArrayList<Throws> throwsList = Throws.generateThrows(0, new HashSet<String>(), new ArrayList<>(), 1);
-                for (Throws t : throwsList) {
-                        // System.out.println("the throws are");
-                        System.out.println(t.getThrowListItems().toString());
-                        // System.out.println("the length is");
-                        // System.out.println(t.getThrowListItems().size());
-                        // System.out.println("the chance is");
-                        // System.out.println(t.getChance());
+                HashSet<ArrayList<String>> throwsList = Throws.generateThrows(0, new ArrayList<String>(),
+                                new HashSet<ArrayList<String>>(), 1);
+                for (ArrayList<String> t : throwsList) {
+                        System.out.println(t.toString());
                 }
                 System.out.println("*".repeat(20));
                 System.out.println("the size is ");
