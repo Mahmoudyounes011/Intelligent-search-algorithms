@@ -1,6 +1,8 @@
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class Game {
     public void start() {
@@ -16,16 +18,15 @@ public class Game {
             return n.heuristic();
         }
 
-        ArrayList<ArrayList<String>> toThrowDices = new ArrayList<>();
+        HashSet<ArrayList<String>> toThrowDices = new HashSet<>();
 
         ArrayList<State> states = new ArrayList<>();
         ArrayList<Node> childrenNodes = new ArrayList<>();
         if (n.getType() == "max") {
             if (dices.isEmpty()) {
-                // toThrowDices= Throws.generateThrows(0,new ArrayList<String>(), new
-                // ArrayList<>(), 1);
+                toThrowDices = Throws.getThrows();
             } else {
-                toThrowDices = Throws.getPermutations(dices);
+                toThrowDices = new HashSet<>(Throws.getPermutations(dices));
 
             }
             for (ArrayList<String> t : toThrowDices) {
@@ -39,10 +40,9 @@ public class Game {
             return value;
         } else if (n.getType() == "min") {
             if (dices.isEmpty()) {
-                // toThrowDices= Throws.generateThrows(0,new ArrayList<String>(), new
-                // ArrayList<>(), 1);
+                toThrowDices = Throws.getThrows();
             } else {
-                toThrowDices = Throws.getPermutations(dices);
+                toThrowDices = new HashSet<>(Throws.getPermutations(dices));
 
             }
             for (ArrayList<String> t : toThrowDices) {
