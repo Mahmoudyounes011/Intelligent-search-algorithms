@@ -7,7 +7,7 @@ public class GameTest {
         Game game = new Game();
         State s = State.first_state();
         Node n = new Node("max", null, s, 0);
-        int value = game.expectIMinMax(n, 0, "max");
+        int value = game.expectIMinMax(n, 0);
         System.out.println(n.heuristic());
         assertEquals(value, n.heuristic());
     }
@@ -23,7 +23,7 @@ public class GameTest {
         s.getplayer1().getStone4().setPosition(84);
         System.out.println(s.isfinished(1));
         Node n = new Node("computer", null, s, 0);
-        int value = game.expectIMinMax(n, 1, "computer");
+        int value = game.expectIMinMax(n, 1);
         System.out.println(n.heuristic());
         assertEquals(value, n.heuristic());
     }
