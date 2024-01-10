@@ -1,8 +1,12 @@
+import java.util.ArrayList;
+
 public class Node {
     private Node parent;
     private State state;
     private int depth;
     private String type;
+    private double chance;
+    private ArrayList<String> thrownDice;
 
     public Node(String type, Node parent, State state, int depth) {
         this.type = type;
@@ -61,5 +65,21 @@ public class Node {
             return Integer.MIN_VALUE;
         }
         return 1;
+    }
+
+    public double getChance() {
+        return chance;
+    }
+
+    public void setChance(double chance) {
+        this.chance = chance;
+    }
+
+    public ArrayList<String> getThrownDice() {
+        return thrownDice;
+    }
+
+    public void setThrownDice(ArrayList<String> thrownDice) {
+        this.thrownDice = thrownDice;
     }
 }
