@@ -1,5 +1,10 @@
 
 // import java.util.ArrayList;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.*;
 
 public class Throws {
@@ -49,6 +54,27 @@ public class Throws {
                 }
         }
         return tList;
+    }
+
+    public static void serilize() {
+        HashSet<ArrayList<String>> throwsList = Throws.generateThrows(0, new ArrayList<String>(),
+                new HashSet<ArrayList<String>>(), 1);
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("result.ser"))) {
+            out.writeObject(throwsList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static HashSet<ArrayList<String>> getThrows() {
+        HashSet<ArrayList<String>> throwsList = null;
+
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("result.ser"))) {
+            throwsList = (HashSet<ArrayList<String>>) in.readObject();
+        } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
+        }
+        return throwsList;
     }
 
     public static ArrayList<ArrayList<String>> getPermutations(ArrayList<String> elements) {

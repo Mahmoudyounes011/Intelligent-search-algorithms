@@ -23,15 +23,7 @@ public class Main {
                 // for (State movables : movable1){
                 // Grid.print_grid(movables);
                 // }
-                // System.out.println("hi");
-                // int[] resultList = { 1, 2 };
-                // try (ObjectOutputStream out = new ObjectOutputStream(new
-                // FileOutputStream("result.ser"))) {
-                // out.writeObject(resultList);
-                // } catch (IOException e) {
-                // e.printStackTrace();
-                // }
-                // System.out.println("nana");
+
                 // int[] resultList = null;
                 // try (ObjectInputStream in = new ObjectInputStream(new
                 // FileInputStream("result.ser"))) {
@@ -44,11 +36,20 @@ public class Main {
                 // System.out.println("Element at index " + i + " : " + resultList[i]);
                 // }
 
-                HashSet<ArrayList<String>> throwsList = Throws.generateThrows(0, new ArrayList<String>(),
-                                new HashSet<ArrayList<String>>(), 1);
-                // for (ArrayList<String> t : throwsList) {
-                // System.out.println(t.toString());
-                // }
+                // HashSet<ArrayList<String>> throwsList = Throws.generateThrows(0, new
+                // ArrayList<String>(),
+                // new HashSet<ArrayList<String>>(), 1);
+                // // for (ArrayList<String> t : throwsList) {
+                // // System.out.println(t.toString());
+                // // }
+                // System.out.println("*".repeat(20));
+                // System.out.println("the size is ");
+                // System.out.println(throwsList.size());
+
+                // Throws.serilize();
+
+                HashSet<ArrayList<String>> throwsList = Throws.getThrows();
+
                 System.out.println("*".repeat(20));
                 System.out.println("the size is ");
                 System.out.println(throwsList.size());
