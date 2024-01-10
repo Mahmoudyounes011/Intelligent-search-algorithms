@@ -67,4 +67,26 @@ public class Throws {
         }
         return tList;
     }
+
+    public static ArrayList<ArrayList<String>> getPermutations(ArrayList<String> elements) {
+        ArrayList<ArrayList<String>> permutations = new ArrayList<>();
+        generatePermutations(elements, 0, permutations);
+        return permutations;
+    }
+
+    private static void generatePermutations(ArrayList<String> elements, int currentIndex,
+            ArrayList<ArrayList<String>> permutations) {
+        if (currentIndex == elements.size() - 1) {
+            permutations.add(new ArrayList<>(elements));
+            return;
+        }
+        for (int i = currentIndex; i < elements.size(); i++) {
+            // Swap the current element with the element at index i
+            Collections.swap(elements, currentIndex, i);
+            // Recursively generate permutations for the remaining elements
+            generatePermutations(elements, currentIndex + 1, permutations);
+            // Undo the swap to backtrack
+            Collections.swap(elements, currentIndex, i);
+        }
+    }
 }
