@@ -46,9 +46,9 @@ public class Main {
 
                 HashSet<ArrayList<String>> throwsList = Throws.generateThrows(0, new ArrayList<String>(),
                                 new HashSet<ArrayList<String>>(), 1);
-                for (ArrayList<String> t : throwsList) {
-                        System.out.println(t.toString());
-                }
+                // for (ArrayList<String> t : throwsList) {
+                // System.out.println(t.toString());
+                // }
                 System.out.println("*".repeat(20));
                 System.out.println("the size is ");
                 System.out.println(throwsList.size());

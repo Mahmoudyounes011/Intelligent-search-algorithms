@@ -5,29 +5,6 @@ import java.util.*;
 public class Throws {
     static String[] stones = { "dist", "bnj", "sheqah", "bara", "dowaq", "three", "four" };
     static HashMap<String, Double> stone_probabilities = new HashMap<>();
-    private ArrayList<String> throwListItems;
-    private double chance;
-
-    public Throws(ArrayList<String> t, double chance) {
-        this.throwListItems = t;
-        this.chance = chance;
-    }
-
-    public ArrayList<String> getThrowListItems() {
-        return throwListItems;
-    }
-
-    public void setThrowListItems(ArrayList<String> t) {
-        this.throwListItems = t;
-    }
-
-    public double getChance() {
-        return chance;
-    }
-
-    public void setChance(double chance) {
-        this.chance = chance;
-    }
 
     public static HashSet<ArrayList<String>> generateThrows(int current,
             ArrayList<String> throwSequence, HashSet<ArrayList<String>> tList,
@@ -41,8 +18,8 @@ public class Throws {
             stone_probabilities.put("three", 0.27648);
             stone_probabilities.put("four", 0.13824);
         }
-        if (current == 5) {
-            if (cumulative_prob > 0.000001) {
+        if (current == 10) {
+            if (cumulative_prob > 0.0001) {
                 ArrayList<ArrayList<String>> permutations = getPermutations(throwSequence);
                 for (ArrayList<String> p : permutations) {
                     tList.add(p);
@@ -52,7 +29,7 @@ public class Throws {
         }
         for (String stone : stones) {
             double next_prob = stone_probabilities.get(stone);
-            if (cumulative_prob * next_prob > 0.000001)
+            if (cumulative_prob * next_prob > 0.0001)
                 if (stone == "dist" || stone == "bnj" || stone == "sheqah" || stone == "bara") {
                     ArrayList<String> throwItem = new ArrayList<String>();
                     throwItem.addAll(throwSequence);
