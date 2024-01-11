@@ -169,7 +169,7 @@ public class State {
         }
     }
 
-    public ArrayList<State> nextstate(State state, ArrayList<String> dices) {
+    public static ArrayList<State> nextstate(State state, ArrayList<String> dices) {
         ArrayList<State> previousStates = new ArrayList<State>();
         ArrayList<State> movable = new ArrayList<State>();
 
@@ -177,9 +177,9 @@ public class State {
             if (previousStates.isEmpty()) {
                 for (int stoneNumber = 1; stoneNumber <= 4; stoneNumber++) {
                     State tempState = new State(state);
-                    if (tempState.check(Dice.num(dString), tempState.player2.getstonefronum(stoneNumber), 2)) {
+                    if (Game.check(tempState, Dice.num(dString), tempState.player2.getstonefronum(stoneNumber), 2)) {
                         tempState = new State(
-                                tempState.move(tempState, Dice.num(dString),
+                                Game.move(tempState, Dice.num(dString),
                                         tempState.player2.getstonefronum(stoneNumber), 2));
                         previousStates.add(tempState);
                     }
@@ -195,10 +195,10 @@ public class State {
                 for (State ps : previousStates) {
                     for (int stoneNumber = 1; stoneNumber <= 4; stoneNumber++) {
                         State tempState = new State(ps);
-                        if (tempState.check(num(dString),
+                        if (Game.check(tempState, Dice.num(dString),
                                 tempState.player2.getstonefronum(stoneNumber), 2)) {
                             tempState = new State(
-                                    tempState.move(tempState, num(dString),
+                                    Game.move(tempState, Dice.num(dString),
                                             tempState.player2.getstonefronum(stoneNumber), 2));
                             tempPreviousState.add(tempState);
                         }
