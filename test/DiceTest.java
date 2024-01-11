@@ -9,6 +9,12 @@ public class DiceTest {
         System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
         String result = Dice.RandomDice();
         System.out.println("the result of throwing a dice is " + result);
+        String result2 = Dice.RandomDice();
+        System.out.println("the result of throwing a dice is " + result2);
+        String result3 = Dice.RandomDice();
+        System.out.println("the result of throwing a dice is " + result3);
+        String result4 = Dice.RandomDice();
+        System.out.println("the result of throwing a dice is " + result4);
         Assertions.assertNotNull(result);
     }
 
