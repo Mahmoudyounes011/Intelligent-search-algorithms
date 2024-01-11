@@ -177,9 +177,9 @@ public class State {
             if (previousStates.isEmpty()) {
                 for (int stoneNumber = 1; stoneNumber <= 4; stoneNumber++) {
                     State tempState = new State(state);
-                    if (tempState.check(num(dString), tempState.player2.getstonefronum(stoneNumber), 2)) {
+                    if (tempState.check(Dice.num(dString), tempState.player2.getstonefronum(stoneNumber), 2)) {
                         tempState = new State(
-                                tempState.move(tempState, num(dString),
+                                tempState.move(tempState, Dice.num(dString),
                                         tempState.player2.getstonefronum(stoneNumber), 2));
                         previousStates.add(tempState);
                     }
