@@ -1,8 +1,18 @@
 import java.util.List;
 
 public class Dice {
+    public static final String DIST = "dist";
+    public static final String BNJ = "bnj";
+    public static final String SHEQAH = "sheqah";
+    public static final String BARA = "bara";
+    public static final String DOWAQ = "dowaq";
+    public static final String THREE = "three";
+    public static final String FOUR = "four";
+    public static final String KHAL = "khal";
+
     public static String RandomDice() {
-        List<String> options = List.of("dist", "bnj", "sheqah", "bara", "dowaq", "three", "four");
+
+        List<String> options = List.of(Dice.DIST, Dice.BNJ, Dice.SHEQAH, Dice.BARA, Dice.DOWAQ, Dice.THREE, Dice.FOUR);
         List<Double> probabilities = List.of(0.186624, 0.0368864, 0.046656, 0.004096, 0.31104, 0.27648, 0.13824);
         double rand = Math.random();
         double cumulativeProb = 0;
@@ -20,28 +30,28 @@ public class Dice {
     public static int num(String result) {
         int num = 0;
         switch (result) {
-            case "dist":
+            case Dice.DIST:
                 num = 10;
                 break;
-            case "bnj":
+            case Dice.BNJ:
                 num = 25;
                 break;
-            case "sheqah":
+            case Dice.SHEQAH:
                 num = 6;
                 break;
-            case "bara":
+            case Dice.BARA:
                 num = 12;
                 break;
-            case "dowaq":
+            case Dice.DOWAQ:
                 num = 2;
                 break;
-            case "three":
+            case Dice.THREE:
                 num = 3;
                 break;
-            case "four":
+            case Dice.FOUR:
                 num = 4;
                 break;
-            case "khal":
+            case Dice.KHAL:
                 num = 1;
                 break;
         }
