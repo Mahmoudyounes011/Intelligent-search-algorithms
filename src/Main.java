@@ -6,9 +6,9 @@ public class Main {
                 // Grid.print_grid(state);
                 ArrayList<String> dices = new ArrayList<>();
                 ArrayList<State> movable = new ArrayList<>();
-                dices.add("khal");
-                dices.add("khal");
-                dices.add("dist");
+                dices.add(Dice.KHAL);
+                dices.add(Dice.KHAL);
+                dices.add(Dice.DIST);
                 movable = State.nextstate(state, dices);
                 for (State m : movable) {
                         // Grid.print_grid(m);

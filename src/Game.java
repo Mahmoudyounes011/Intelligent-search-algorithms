@@ -59,12 +59,12 @@ public class Game {
         // خطوة الرمي
 
         for (int i = 0; i < 10; i++) {
-            if (dice == "four" || dice == "three" || dice == "dowaq") {
+            if (dice == Dice.FOUR || dice == Dice.THREE || dice == Dice.DOWAQ) {
                 dices.add(dice);
                 break;
-            } else if (dice == "bnj" || dice == "dist") {
+            } else if (dice == Dice.BNJ || dice == Dice.DIST) {
                 dices.add(dice);
-                dices.add("khal");
+                dices.add(Dice.KHAL);
                 dice = Dice.RandomDice();
 
             } else
@@ -82,8 +82,8 @@ public class Game {
         if (state.getposition(player, 0)) {
             int old_size = dices.size();
             for (int i = 0; i < dices.size(); i++) {
-                if (dices.get(i) == "khal") {
-                    System.out.println("khal");
+                if (dices.get(i) == Dice.KHAL) {
+                    System.out.println(Dice.KHAL);
                     new_state = Choose_stone(new_state, player, (String) dices.get(i));
                     dices.remove(i);
                     break;

@@ -22,7 +22,7 @@ public class DiceTest {
     public void testNumDist() {
         System.out.println("*".repeat(10));
         System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-        int result = Dice.num("dist");
+        int result = Dice.num(Dice.DIST);
         System.out.println(result);
         Assertions.assertEquals(10, result);
     }
@@ -31,7 +31,7 @@ public class DiceTest {
     public void testNumBnj() {
         System.out.println("*".repeat(10));
         System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-        int result = Dice.num("bnj");
+        int result = Dice.num(Dice.BNJ);
         System.out.println(result);
         Assertions.assertEquals(25, result);
     }
@@ -40,7 +40,7 @@ public class DiceTest {
     public void testNumSheqah() {
         System.out.println("*".repeat(10));
         System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-        int result = Dice.num("sheqah");
+        int result = Dice.num(Dice.SHEQAH);
         System.out.println(result);
         Assertions.assertEquals(6, result);
 
@@ -50,7 +50,7 @@ public class DiceTest {
     public void testNumBara() {
         System.out.println("*".repeat(10));
         System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-        int result = Dice.num("bara");
+        int result = Dice.num(Dice.BARA);
         System.out.println(result);
         Assertions.assertEquals(12, result);
 
@@ -60,7 +60,7 @@ public class DiceTest {
     public void testNumDowaq() {
         System.out.println("*".repeat(10));
         System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-        int result = Dice.num("dowaq");
+        int result = Dice.num(Dice.DOWAQ);
         System.out.println(result);
         Assertions.assertEquals(2, result);
     }
@@ -69,7 +69,7 @@ public class DiceTest {
     public void testNumThree() {
         System.out.println("*".repeat(10));
         System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-        int result = Dice.num("three");
+        int result = Dice.num(Dice.THREE);
         System.out.println(result);
         Assertions.assertEquals(3, result);
 
@@ -79,7 +79,7 @@ public class DiceTest {
     public void testNumFour() {
         System.out.println("*".repeat(10));
         System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-        int result = Dice.num("four");
+        int result = Dice.num(Dice.FOUR);
         System.out.println(result);
         Assertions.assertEquals(4, result);
 
@@ -89,7 +89,7 @@ public class DiceTest {
     public void testNumKhal() {
         System.out.println("*".repeat(10));
         System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-        int result = Dice.num("khal");
+        int result = Dice.num(Dice.KHAL);
         System.out.println(result);
         Assertions.assertEquals(1, result);
 

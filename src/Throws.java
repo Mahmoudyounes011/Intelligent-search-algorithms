@@ -8,20 +8,20 @@ import java.io.ObjectOutputStream;
 import java.util.*;
 
 public class Throws {
-    static String[] stones = { "dist", "bnj", "sheqah", "bara", "dowaq", "three", "four" };
+    static String[] stones = { Dice.DIST, Dice.BNJ, Dice.SHEQAH, Dice.BARA, Dice.DOWAQ, Dice.THREE, Dice.FOUR };
     static HashMap<String, Double> stone_probabilities = new HashMap<>();
 
     public static HashSet<ArrayList<String>> generateThrows(int current,
             ArrayList<String> throwSequence, HashSet<ArrayList<String>> tList,
             double cumulative_prob) {
         if (current == 0) {
-            stone_probabilities.put("dist", 0.186624);
-            stone_probabilities.put("bnj", 0.0368864);
-            stone_probabilities.put("sheqah", 0.046656);
-            stone_probabilities.put("bara", 0.004096);
-            stone_probabilities.put("dowaq", 0.31104);
-            stone_probabilities.put("three", 0.27648);
-            stone_probabilities.put("four", 0.13824);
+            stone_probabilities.put(Dice.DIST, 0.186624);
+            stone_probabilities.put(Dice.BNJ, 0.0368864);
+            stone_probabilities.put(Dice.SHEQAH, 0.046656);
+            stone_probabilities.put(Dice.BARA, 0.004096);
+            stone_probabilities.put(Dice.DOWAQ, 0.31104);
+            stone_probabilities.put(Dice.THREE, 0.27648);
+            stone_probabilities.put(Dice.FOUR, 0.13824);
         }
         if (current == 10) {
             if (cumulative_prob > 0.0001) {
@@ -35,12 +35,12 @@ public class Throws {
         for (String stone : stones) {
             double next_prob = stone_probabilities.get(stone);
             if (cumulative_prob * next_prob > 0.0001)
-                if (stone == "dist" || stone == "bnj" || stone == "sheqah" || stone == "bara") {
+                if (stone == Dice.DIST || stone == Dice.BNJ || stone == Dice.SHEQAH || stone == Dice.BARA) {
                     ArrayList<String> throwItem = new ArrayList<String>();
                     throwItem.addAll(throwSequence);
                     throwItem.add(stone);
-                    if (stone == "dist" || stone == "bnj") {
-                        throwItem.add("khal");
+                    if (stone == Dice.DIST || stone == Dice.BNJ) {
+                        throwItem.add(Dice.KHAL);
                     }
                     generateThrows(current + 1, throwItem, tList, cumulative_prob * next_prob);
                 } else {
