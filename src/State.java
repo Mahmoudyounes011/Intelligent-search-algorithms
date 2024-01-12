@@ -169,7 +169,7 @@ public class State {
         }
     }
 
-    public static ArrayList<State> nextstate(State state, ArrayList<String> dices) {
+    public static ArrayList<State> nextstate(State state, ArrayList<String> dices, int player_number) {
         ArrayList<State> previousStates = new ArrayList<State>();
         ArrayList<State> movable = new ArrayList<State>();
 
@@ -177,10 +177,12 @@ public class State {
             if (previousStates.isEmpty()) {
                 for (int stoneNumber = 1; stoneNumber <= 4; stoneNumber++) {
                     State tempState = new State(state);
-                    if (Game.check(tempState, Dice.num(dString), tempState.player2.getstonefronum(stoneNumber), 2)) {
+                    if (Game.check(tempState, Dice.num(dString),
+                            tempState.player(player_number).getstonefronum(stoneNumber),
+                            player_number)) {
                         tempState = new State(
                                 Game.move(tempState, Dice.num(dString),
-                                        tempState.player2.getstonefronum(stoneNumber), 2));
+                                        tempState.player(player_number).getstonefronum(stoneNumber), player_number));
                         previousStates.add(tempState);
                     }
                 }
@@ -196,10 +198,11 @@ public class State {
                     for (int stoneNumber = 1; stoneNumber <= 4; stoneNumber++) {
                         State tempState = new State(ps);
                         if (Game.check(tempState, Dice.num(dString),
-                                tempState.player2.getstonefronum(stoneNumber), 2)) {
+                                tempState.player(player_number).getstonefronum(stoneNumber), player_number)) {
                             tempState = new State(
                                     Game.move(tempState, Dice.num(dString),
-                                            tempState.player2.getstonefronum(stoneNumber), 2));
+                                            tempState.player(player_number).getstonefronum(stoneNumber),
+                                            player_number));
                             tempPreviousState.add(tempState);
                         }
                     }
