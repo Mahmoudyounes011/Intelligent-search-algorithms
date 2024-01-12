@@ -15,6 +15,12 @@ public class Node {
         this.depth = depth;
     }
 
+    public Node(Node node) {
+        this(node.getType(), node.getParent(), node.getState(), node.getDepth());
+        this.chance = node.getChance();
+        this.thrownDice = node.getThrownDice();
+    }
+
     public boolean isRoot() {
         return this.parent == null;
     }
