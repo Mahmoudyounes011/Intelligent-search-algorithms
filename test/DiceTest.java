@@ -1,3 +1,8 @@
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -95,4 +100,22 @@ public class DiceTest {
 
     }
 
+    @Test
+    public void testGetDiceProbability() {
+        System.out.println("*".repeat(10));
+        System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+        ArrayList<String> dices = new ArrayList<>();
+        dices.add(Dice.BARA);
+        double diceProbability = Dice.getDiceProbability(dices);
+        System.out.println(diceProbability);
+        assertTrue(diceProbability == Dice.PROBABILITIES.get(Dice.BARA));
+
+        dices.add(Dice.DIST);
+        dices.add(Dice.FOUR);
+
+        diceProbability = Dice.getDiceProbability(dices);
+        System.out.println(diceProbability);
+        assertTrue(diceProbability == Dice.PROBABILITIES.get(Dice.BARA) * Dice.PROBABILITIES.get(Dice.DIST)
+                * Dice.PROBABILITIES.get(Dice.FOUR));
+    }
 }

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Dice {
@@ -9,6 +11,19 @@ public class Dice {
     public static final String THREE = "three";
     public static final String FOUR = "four";
     public static final String KHAL = "khal";
+
+    public static final HashMap<String, Double> PROBABILITIES = new HashMap<>() {
+        {
+            putIfAbsent(Dice.DIST, 0.186624);
+            putIfAbsent(Dice.BNJ, 0.0368864);
+            putIfAbsent(Dice.SHEQAH, 0.046656);
+            putIfAbsent(Dice.BARA, 0.004096);
+            putIfAbsent(Dice.DOWAQ, 0.31104);
+            putIfAbsent(Dice.THREE, 0.27648);
+            putIfAbsent(Dice.FOUR, 0.13824);
+
+        }
+    };
 
     public static String RandomDice() {
 
@@ -58,4 +73,14 @@ public class Dice {
         return num;
     }
 
+    public static double getDiceProbability(ArrayList<String> dices) {
+        double value = 1;
+        for (String diceString : dices) {
+            if (diceString == Dice.KHAL) {
+                continue;
+            }
+            value *= Dice.PROBABILITIES.get(diceString);
+        }
+        return value;
+    }
 }
