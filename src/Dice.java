@@ -21,6 +21,7 @@ public class Dice {
             putIfAbsent(Dice.DOWAQ, 0.31104);
             putIfAbsent(Dice.THREE, 0.27648);
             putIfAbsent(Dice.FOUR, 0.13824);
+            putIfAbsent(Dice.KHAL, 1.0);
 
         }
     };
@@ -76,9 +77,6 @@ public class Dice {
     public static double getDiceProbability(ArrayList<String> dices) {
         double value = 1;
         for (String diceString : dices) {
-            if (diceString == Dice.KHAL) {
-                continue;
-            }
             value *= Dice.PROBABILITIES.get(diceString);
         }
         return value;
