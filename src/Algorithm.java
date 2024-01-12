@@ -3,20 +3,17 @@ import java.util.HashSet;
 
 public class Algorithm {
 
-    public int expectIMinMax(Node n, int depth) {
+    public Node expectIMinMax(Node n, int depth) {
         return expectIMinMax(n, depth, null);
     }
 
-    public int expectIMinMax(Node n, int depth, ArrayList<String> dices) {
-        if (depth == 0 || n.isFinish()) {
-            return n.heuristic();
-        }
+    public Node expectIMinMax(Node n, int depth, ArrayList<String> dices) {
 
         HashSet<ArrayList<String>> toThrowDices = new HashSet<>();
 
-        ArrayList<State> states = new ArrayList<>();
         ArrayList<Node> childrenNodes = new ArrayList<>();
         if (n.getType() == "max") {
+            Node maxNode = new Node(n);
             if (dices.isEmpty()) {
                 toThrowDices = Throws.getThrows();
             } else {
@@ -24,15 +21,19 @@ public class Algorithm {
 
             }
             for (ArrayList<String> t : toThrowDices) {
-                childrenNodes.add(new Node("chance", n.getParent(), n.getState(), depth - 1));
-                n.setThrownDice(t);
+                Node tempNode = new Node("chance", n.getParent(), n.getState(), depth - 1);
+                childrenNodes.add(tempNode);
+                tempNode.setThrownDice(t);
             }
-            int value = Integer.MIN_VALUE;
+            double value = Double.MIN_VALUE;
             for (Node node : childrenNodes) {
-                value = Integer.max(value, expectIMinMax(node, depth - 1, n.getThrownDice()));
+                value = Double.max(value, chance(node, depth - 1, node.getThrownDice()));
+                maxNode = new Node(node);
+                maxNode.setChance(value);
             }
-            return value;
-        } else if (n.getType() == "min") {
+            return maxNode;
+        } else {
+            Node minNode = new Node(n);
             if (dices.isEmpty()) {
                 toThrowDices = Throws.getThrows();
             } else {
@@ -40,26 +41,39 @@ public class Algorithm {
 
             }
             for (ArrayList<String> t : toThrowDices) {
-                childrenNodes.add(new Node("chance", n.getParent(), n.getState(), depth - 1));
-                n.setThrownDice(t);
+                Node tempNode = new Node("chance", n.getParent(), n.getState(), depth - 1);
+                childrenNodes.add(tempNode);
+                tempNode.setThrownDice(t);
             }
-            int value = Integer.MAX_VALUE;
+            double value = Double.MAX_VALUE;
             for (Node node : childrenNodes) {
-                value = Integer.min(value, expectIMinMax(node, depth - 1, n.getThrownDice()));
+                value = Double.min(value, chance(node, depth - 1, n.getThrownDice()));
+                minNode = new Node(node);
+                minNode.setChance(value);
             }
-            return value;
-        } else if (n.getType() == "chance") {
-            // states = State.nextState(n.getThrownDice());
-            for (State state : states) {
-                childrenNodes.add(new Node(n.getParent().getType() == "min" ? "max" : "min", n, state, depth - 1));
-            }
-            int value = 0;
-
-            for (Node node : childrenNodes) {
-                value += node.getChance() * expectIMinMax(node, depth - 1);
-            }
-            return value;
+            return minNode;
         }
-        return 0;
     }
+
+    private double chance(Node n, int depth, ArrayList<String> dices) {
+
+        if (depth == 0 || n.isFinish()) {
+            return n.heuristic();
+        }
+        ArrayList<State> states = new ArrayList<>();
+        ArrayList<Node> childrenNodes = new ArrayList<>();
+
+        states = State.nextstate(n.getState(), n.getThrownDice(), n.getParent().getType() == "min" ? 1 : 2);
+        for (State state : states) {
+            childrenNodes.add(new Node(n.getParent().getType() == "min" ? "max" : "min", n, state, depth - 1));
+        }
+        double value = 0;
+        double prob = Dice.getDiceProbability(dices);
+        for (Node node : childrenNodes) {
+            value += prob * expectIMinMax(node, depth - 1).getChance();
+            node.setChance(value);
+        }
+        return value;
+    }
+
 }
