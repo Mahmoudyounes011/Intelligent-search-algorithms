@@ -63,7 +63,7 @@ public class Node {
 
     // ! player 2 is the computer max
     // ! player 1 is the human min
-    public int heuristic() {
+    public double heuristic() {
         if (this.state.isfinished(2)) {
             return Integer.MAX_VALUE;
         }
@@ -74,6 +74,7 @@ public class Node {
     }
 
     public double getChance() {
+
         return chance;
     }
 
