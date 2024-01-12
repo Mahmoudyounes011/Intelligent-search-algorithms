@@ -12,6 +12,7 @@ public class Algorithm {
         HashSet<ArrayList<String>> toThrowDices = new HashSet<>();
         ArrayList<Node> childrenNodes = new ArrayList<>();
         if (n.getType() == "max") {
+            System.out.println("inside max");
             Node maxNode = new Node(n);
             if (dices.isEmpty()) {
                 toThrowDices = Throws.getThrows();
@@ -20,19 +21,21 @@ public class Algorithm {
             }
             for (ArrayList<String> t : toThrowDices) {
                 Node tempNode = new Node("chance", n.getParent(), n.getState(), depth - 1);
-                childrenNodes.add(tempNode);
                 tempNode.setThrownDice(t);
+                childrenNodes.add(tempNode);
             }
             double value = Double.MIN_VALUE;
             for (Node node : childrenNodes) {
+                Grid.print_grid(node.getState());
                 value = Double.max(value, chance(node, depth - 1, node.getThrownDice()));
                 maxNode = new Node(node);
                 maxNode.setChance(value);
             }
             return maxNode;
         } else {
-            System.out.println("inside the min");
+            System.out.println("inside min");
             Node minNode = new Node(n);
+
             if (dices.isEmpty()) {
                 toThrowDices = Throws.getThrows();
             } else {
@@ -41,12 +44,12 @@ public class Algorithm {
             }
             for (ArrayList<String> t : toThrowDices) {
                 Node tempNode = new Node("chance", n.getParent(), n.getState(), depth - 1);
-                childrenNodes.add(tempNode);
                 tempNode.setThrownDice(t);
+                childrenNodes.add(tempNode);
             }
             double value = Double.MAX_VALUE;
             for (Node node : childrenNodes) {
-                value = Double.min(value, chance(node, depth - 1, n.getThrownDice()));
+                value = Double.min(value, chance(node, depth - 1, node.getThrownDice()));
                 minNode = new Node(node);
                 minNode.setChance(value);
             }
@@ -58,8 +61,8 @@ public class Algorithm {
     // the state should be 1
     // else max or 2
     public double chance(Node n, int depth, ArrayList<String> dices) {
-
-        if (depth == 0 || n.isFinish()) {
+        System.out.println("inside chance");
+        if (depth <= 0 || n.isFinish()) {
             return n.heuristic();
         }
         ArrayList<State> states = new ArrayList<>();
@@ -70,14 +73,10 @@ public class Algorithm {
         for (State state : states) {
             childrenNodes.add(new Node((n.getParent() == null || n.getParent().getType() == "max") ? "min" : "max", n,
                     state, depth - 1));
-            // Grid.print_grid(state);
         }
         double value = 0;
-        System.out.println(dices.toString());
         double prob = Dice.getDiceProbability(dices);
         for (Node node : childrenNodes) {
-            System.out.println("the depth of children is ");
-            System.out.println(node.getDepth());
             value += prob * expectIMinMax(node, depth - 1).getChance();
             node.setChance(value);
         }
